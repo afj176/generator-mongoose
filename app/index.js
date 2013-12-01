@@ -72,6 +72,8 @@ MongooseGenerator.prototype.app = function app() {
   this.mkdir('config');
   this.template('_package.json', 'package.json');
   this.template('_app.js', 'app.js');  
+  this.copy('Gruntfile.js', 'Gruntfile.js');
+  this.copy('bowerrc', '.bowerrc');
   this.template('_bower.json', 'bower.json');
 };
 

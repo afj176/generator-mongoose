@@ -6,17 +6,18 @@
 	"dependencies": {
 		"ejs": "latest",
 		"express": "latest",
-		"mongoose": "latest",
-    "crypto": "latest"
+		"mongoose": "latest"
 	},
 	"devDependencies": {
     "grunt": "latest",
-    "bower": "latest",		
-		"supertest": "latest",
-		"mocha": "latest"
+    "grunt-mocha-test": "latest",
+    "bower": "latest",    
+    "supertest": "latest",
+    "mocha": "latest"
 	},
   "scripts": {
-    "test" : "mocha",
+    "postinstall": "grunt test",
+    "test" : "grunt test",
     "start": "app.js"
   }	
 }
