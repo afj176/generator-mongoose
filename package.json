@@ -1,9 +1,15 @@
 {
   "name": "generator-mongoose",
   "version": "0.0.0",
-  "description": "A mongoose generator for Yeoman",
+  "description": "A mongoose schema generator for Yeoman",
   "keywords": [
-    "yeoman-generator"
+    "yo",
+    "yeoman",
+    "generator",  
+    "yeoman-generator",
+    "mongoose",
+    "mongodb",
+    "schema"
   ],
   "homepage": "https://github.com/afj176/generator-mongoose",
   "bugs": "https://github.com/afj176/generator-mongoose/issues",
