@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= siteName %></title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<h1><%= siteName %></h1>
+
+  <% if(typeof routes != 'undefined'){ %>
+  <div class="routes">
+    <% Object.keys(routes).forEach(function(appRoute){ %>
+    	<h3><%= appRoute %></h3>
+    	<% routes[appRoute].forEach(function(route){ %>
+		    <div class="route">
+		    	<a href="<%= route.path %>" title="<%= route.path %>"><%= route.path %></a>
+		    </div>
+			<% }) %>    
+    <% }) %>
+  <% } %>
+  </div>
+	
+	<script type="text/javascript" src="/js/script.js"></script>
+</body>
+</html>

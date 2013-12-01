@@ -1,0 +1,22 @@
+{
+  "name": "<%= _.slugify(appname) %>",
+  "description": "<%= _.slugify(appname) %> app description here",
+  "version": "0.0.1",
+  "private": true,
+	"dependencies": {
+		"ejs": "latest",
+		"express": "latest",
+		"mongoose": "latest",
+    "crypto": "latest"
+	},
+	"devDependencies": {
+    "grunt": "latest",
+    "bower": "latest",		
+		"supertest": "latest",
+		"mocha": "latest"
+	},
+  "scripts": {
+    "test" : "mocha",
+    "start": "app.js"
+  }	
+}
