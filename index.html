@@ -1,0 +1,98 @@
+---
+layout: default
+---
+	<div class="readme"> <!-- Start readme -->
+
+	<h1>generator-mongoose <a href="https://travis-ci.org/afj176/generator-mongoose"><img src="https://secure.travis-ci.org/afj176/generator-mongoose.png?branch=master" alt="Build Status" /></a></h1>
+
+	<p>A generator for <a href="http://yeoman.io">Yeoman</a>.</p>
+  <ul class="social-buttons">
+    <li>
+      <iframe src="http://ghbtns.com/github-btn.html?user=afj176&amp;repo=generator-mongoose&amp;type=fork" width="55" height="20" title="Fork on GitHub"></iframe>
+    </li>
+    <li>
+			<div class="g-plus" data-action="share" data-annotation="none" data-href="http://www.yomongoo.se/"></div>
+    </li>	
+    <li>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.yomongoo.se/" data-count="none" data-text="YO! Mongoose (generator-mongoose). A generator for Yeoman.">Tweet</a>
+    </li>
+  </ul>
+	<h2>Getting Started</h2>
+	<hr>
+	<h3>What is Yeoman?</h3>
+
+	<p>Trick question. It's not a thing. It's this guy:</p>
+
+	<p><img class="banner" src="http://i.imgur.com/KvLOBSb.jpg" alt="" /></p>
+
+	<p>Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.</p>
+
+	<p>Not every new computer comes with a Yeoman pre-installed. He lives in the <a href="https://npmjs.org">npm</a> package repository. You only have to ask for him once, then he packs up and moves into your hard drive. <em>Make sure you clean up, he likes new and shiny things.</em></p>
+
+<pre><code>$ npm install -g yo</code></pre>
+
+	<h3>Generator Mongoose</h3>
+
+	<p>While running through a leafy mongodb field he picked up mongoose.</p>
+
+	<p>To install generator-mongoose from npm, run:</p>
+
+<pre><code>$ npm install -g generator-mongoose</code></pre>
+
+	<p>Finally, initiate the generator:</p>
+
+<pre><code>$ yo mongoose</code></pre>
+
+	<p>It should output a file structure similiar to:</p>
+
+<pre><code>.bowerrc
+.editorconfig
+.jshintrc    
+config/
+  - db.js
+public/
+  css/  
+     - style.css
+  js/  
+     - script.css
+models/
+    - post.js
+routes/
+  - index.js
+  - post.js
+test/
+  - test-post.js
+views/
+  - index.html
+bower.json
+Gruntfile.js
+package.json
+Readme.md
+</code></pre>
+
+	<h3>Sub Generator Schema</h3>
+
+	<p>Run the sub generator for schemas:</p>
+
+<pre><code>$ yo mongoose:schema "article|title:String,excerpt:String,content:String,published:Boolean,created:Date"</code></pre>
+
+<pre><code>models/
+  - article.js
+routes/
+  - article.js
+test/
+  - test-article.js
+</code></pre>
+
+	<h3>Getting To Know Yeoman</h3>
+
+	<p>Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.</p>
+
+	<p>If you'd like to get to know Yeoman better and meet some of his friends, <a href="http://gruntjs.com">Grunt</a> and <a href="http://bower.io">Bower</a>, check out the complete <a href="https://github.com/yeoman/yeoman/wiki/Getting-Started">Getting Started Guide</a>.</p>
+
+	<h2>License</h2>
+
+	<p><a href="http://en.wikipedia.org/wiki/MIT_License">MIT License</a></p>
+
+
+	</div> <!-- End readme -->
