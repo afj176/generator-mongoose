@@ -22,7 +22,7 @@ module.exports = function(app) {
       if (err) {
         res.json(404, err);
       } else {
-        res.json({post: post});
+        res.json(200, {post: post});
       }
     });
   };
@@ -94,11 +94,11 @@ module.exports = function(app) {
   // DELETE
   api.deletePost = function (req, res) {
     var id = req.params.id;
-    return Post.findById(id, function (err, post) {
+    Post.findById(id, function (err, post) {
       return post.remove(function (err) {
         if (!err) {
           console.log("removed post");
-          return res.json(204);
+          return res.send(204);
         } else {
           console.log(err);
           return res.json(500, err);

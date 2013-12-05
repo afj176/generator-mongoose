@@ -19,7 +19,7 @@ describe('POST New Post', function(){
       "content": "Alice may have called in on the meeting at Malkin Tower on her way to a secret (and illegal) Good Friday Catholic service, and refused to speak for fear of incriminating her fellow Catholics.",
       "active": true
     } })
-    .expect(200)
+    .expect(201)
     .end(function(err, res) {
       if (err) {
         throw err;

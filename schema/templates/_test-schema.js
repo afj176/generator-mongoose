@@ -14,7 +14,7 @@ describe('POST New <%= _.capitalize(schemaName) %>', function(){
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
     .send({"<%= schemaName.toLowerCase() %>": <%= mockData %>})
-    .expect(200)
+    .expect(201)
     .end(function(err, res) {
       if (err) {
         throw err;
@@ -61,6 +61,6 @@ describe('DELETE <%= _.capitalize(schemaName) %> by ID', function(){
   it('should delete <%= schemaName.toLowerCase() %> and return 200 status code', function(done){
     request(app)
     .del('/api/<%= schemaName.toLowerCase() %>/'+ _id) 
-    .expect(200, done);
+    .expect(204, done);
   });
 });
