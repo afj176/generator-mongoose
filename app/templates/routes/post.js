@@ -8,8 +8,7 @@ module.exports = function(app) {
   api.posts = function (req, res) {
     Post.find(function(err, posts) {
       if (err) {
-        res.status(500);
-        res.json(err);
+        res.json(500, err);
       } else {    
         res.json({posts: posts});
       }
@@ -21,8 +20,7 @@ module.exports = function(app) {
     var id = req.params.id;
     Post.findOne({ '_id': id }, function(err, post) {
       if (err) {
-        res.status(500);
-        res.json(err);
+        res.json(404, err);
       } else {
         res.json({post: post});
       }
@@ -35,8 +33,7 @@ module.exports = function(app) {
     var post;
       
     if(typeof req.body.post == 'undefined'){
-         res.status(500);
-         return res.json({message: 'post is undefined'});
+      return res.json(500, {message: 'post is undefined'});
     }
 
     post = new Post(req.body.post);
@@ -44,10 +41,9 @@ module.exports = function(app) {
     post.save(function (err) {
       if (!err) {
         console.log("created post");
-        return res.json(post.toObject(), 200);
+        return res.json(201, post.toObject());
       } else {
-         res.status(500);
-         return res.json(err);
+         return res.json(500, err);
       }
     });
 
@@ -85,10 +81,9 @@ module.exports = function(app) {
       return post.save(function (err) {
         if (!err) {
           console.log("updated post");
-          return res.json({}, 200);        
+          return res.json(200, post.toObject());        
         } else {
-         res.status(500);
-         return res.json(err);
+         return res.json(500, err);
         }
         return res.json(post);
       });
@@ -103,11 +98,10 @@ module.exports = function(app) {
       return post.remove(function (err) {
         if (!err) {
           console.log("removed post");
-          return res.send('');
+          return res.json(204);
         } else {
           console.log(err);
-          res.status(500);
-          return res.json(err);
+          return res.json(500, err);
         }
       });
     });

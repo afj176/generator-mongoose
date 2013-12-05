@@ -8,8 +8,7 @@ module.exports = function(app) {
   api.<%= schemaName.toLowerCase() %>s = function (req, res) {
     <%= _.capitalize(schemaName) %>.find(function(err, <%= schemaName.toLowerCase() %>s) {
       if (err) {
-        res.status(500);
-        res.json(err);
+        res.json(500, err);
       } else {    
         res.json({<%= schemaName.toLowerCase() %>s: <%= schemaName.toLowerCase() %>s});
       }
@@ -21,8 +20,7 @@ module.exports = function(app) {
     var id = req.params.id;
     <%= _.capitalize(schemaName) %>.findOne({ '_id': id }, function(err, <%= schemaName.toLowerCase() %>) {
       if (err) {
-        res.status(500);
-        res.json(err);
+        res.json(404, err);
       } else {
         res.json({<%= schemaName.toLowerCase() %>: <%= schemaName.toLowerCase() %>});
       }
@@ -44,10 +42,9 @@ module.exports = function(app) {
     <%= schemaName.toLowerCase() %>.save(function (err) {
       if (!err) {
         console.log("created <%= schemaName.toLowerCase() %>");
-        return res.json(<%= schemaName.toLowerCase() %>.toObject(), 200);
+        return res.json(201, <%= schemaName.toLowerCase() %>.toObject());
       } else {
-         res.status(500);
-         return res.json(err);
+        return res.json(500, err);
       }
     });
 
@@ -69,10 +66,9 @@ module.exports = function(app) {
       return <%= schemaName.toLowerCase() %>.save(function (err) {
         if (!err) {
           console.log("updated <%= schemaName.toLowerCase() %>");
-          return res.json({}, 200);        
+          return res.json(200, <%= schemaName.toLowerCase() %>.toObject());        
         } else {
-         res.status(500);
-         return res.json(err);
+         return res.json(500, err);
         }
         return res.json(<%= schemaName.toLowerCase() %>);
       });
@@ -87,11 +83,10 @@ module.exports = function(app) {
       return <%= schemaName.toLowerCase() %>.remove(function (err) {
         if (!err) {
           console.log("removed <%= schemaName.toLowerCase() %>");
-          return res.send('');
+          return res.send(204);
         } else {
           console.log(err);
-          res.status(500);
-          return res.json(err);
+          return res.json(500, err);
         }
       });
     });

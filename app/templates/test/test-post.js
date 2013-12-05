@@ -63,9 +63,9 @@ describe('PUT Post by ID', function(){
 });
 
 describe('DELETE Post by ID', function(){
-  it('should delete post and return 200 status code', function(done){
+  it('should delete post and return 204 status code', function(done){
     request(app)
     .del('/api/post/'+ _id) 
-    .expect(200, done);
+    .expect(204, done);
   });
 });
