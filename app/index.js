@@ -2,6 +2,7 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var monty = require('./yo-ascii');
 
 
 var MongooseGenerator = module.exports = function MongooseGenerator(args, options, config) {
@@ -19,41 +20,43 @@ util.inherits(MongooseGenerator, yeoman.generators.Base);
 MongooseGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
+  // have Monty greet the user.
+  console.log(monty);
 
 
   var prompts = [
-  {
-    name: 'dbName',
-    message: 'Database Name',
-    default: 'myDb'
-  },
-  {
-    name: 'dbHost',
-    message: 'Database Host',
-    default: 'localhost'
-  },
-  {
-    name: 'dbUser',
-    message: 'Database User'
-  },
-  {
-    type: 'password',
-    name: 'dbPassword',
-    message: 'Database Password'
-  },
-  {
-    name: 'dbPort',
-    message: 'Database Port',
-    default: 27017
-  },        
-  {
-    type: 'confirm',
-    name: 'useHeroku',
-    message: 'Will you be using heroku?',
-    default: true
-  }
+    {
+      name: 'dbName',
+      message: 'Database Name',
+      default: 'myDb'
+    },
+    {
+      name: 'dbHost',
+      message: 'Database Host',
+      default: 'localhost'
+    },
+    {
+      name: 'dbUser',
+      message: 'Database User',
+      default: ''
+    },
+    {
+      type: 'password',
+      name: 'dbPassword',
+      message: 'Database Password',
+      default: ''
+    },
+    {
+      name: 'dbPort',
+      message: 'Database Port',
+      default: 27017
+    },
+    {
+      type: 'confirm',
+      name: 'useHeroku',
+      message: 'Will you be using heroku?',
+      default: true
+    }
   ];
 
   this.prompt(prompts, function (props) {
@@ -71,7 +74,7 @@ MongooseGenerator.prototype.app = function app() {
   this.mkdir('test');
   this.mkdir('config');
   this.template('_package.json', 'package.json');
-  this.template('_app.js', 'app.js');  
+  this.template('_app.js', 'app.js');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('bowerrc', '.bowerrc');
   this.template('_bower.json', 'bower.json');
@@ -111,5 +114,3 @@ MongooseGenerator.prototype.db = function db() {
 MongooseGenerator.prototype.test = function test() {
   this.template('test/test-post.js', 'test/test-post.js');
 };
-
-
