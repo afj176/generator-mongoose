@@ -1,5 +1,7 @@
 # generator-mongoose [![Build Status](https://secure.travis-ci.org/afj176/generator-mongoose.png?branch=master)](https://travis-ci.org/afj176/generator-mongoose)
 
+[![NPM](https://nodei.co/npm/generator-mongoose.png?downloads=true&stars=true)](https://nodei.co/npm/generator-mongoose/)
+
 A generator for [Yeoman](http://yeoman.io).
 
 
@@ -38,7 +40,7 @@ It should output a file structure similiar to:
 
     .bowerrc
     .editorconfig
-    .jshintrc    
+    .jshintrc
     config/
       - db.js
     public/
@@ -62,19 +64,21 @@ It should output a file structure similiar to:
 
 
 ### Sub Generator Schema
-          
+
 Run the sub generator for schemas:
 
 ```
 $ yo mongoose:schema "article|title:String,excerpt:String,content:String,published:Boolean,created:Date"
 ```
 
-    models/
-      - article.js
-    routes/
-      - article.js
-    test/
-      - test-article.js    
+output:
+
+    Your creating a schema for article
+    With the fields: title,excerpt,content,published,created
+       create routes/article.js
+       create models/article.js
+    starting request to schematic for test mock data...
+       create test/test-article.js
 
 
 ### Getting To Know Yeoman
@@ -90,4 +94,3 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/afj176/generator-mongoose/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
