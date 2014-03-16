@@ -42,11 +42,11 @@ describe('mongoose generator', function () {
             'dbUser'    : '',
             'dbPassword': '',
             'dbPort'    : 27017,
-            'useHeroku' : true           
+            'useHeroku' : true
         });
         this.app.options['skip-install'] = true;
         this.app.run({}, function () {
-            helpers.assertFiles(expected);
+            helpers.assertFile(expected);
             done();
         });
     });
@@ -78,7 +78,7 @@ describe('mongoose generator', function () {
             helpers.mockPrompt(this.app, {});
             this.app.options['skip-install'] = true;
             this.app.run({}, function () {
-                helpers.assertFiles(expected);
+                helpers.assertFile(expected);
                 done();
             });
         });
