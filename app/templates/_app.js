@@ -11,17 +11,15 @@ var express = require('express'),
 
 var app = module.exports = exports.app = express();
 
-app.locals.siteName = "MongooseGettingStarted";
+app.locals.siteName = "<%= _.capitalize(appname) %>";
 
 // Connect to database
 var db = require('./config/db');
 
-app.use(express.static(__dirname + '/public'));
-
 // Bootstrap models
 var modelsPath = path.join(__dirname, 'models');
 fs.readdirSync(modelsPath).forEach(function (file) {
-    require(modelsPath + '/' + file);
+  require(modelsPath + '/' + file);
 });
 
 var env = process.env.NODE_ENV || 'development';
@@ -37,7 +35,6 @@ if ('development' == env) {
     });
 }
 
-
 if ('test' == env) {
     app.use(morgan('test'));
     app.set('view options', {
@@ -50,23 +47,19 @@ if ('production' == env) {
     app.use(express.errorHandler());
 }
 
-
-
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(methodOverride());
 app.use(bodyParser());
-// Router needs to be last
-//app.use(app.router);
 
 // Bootstrap routes/api
 var routesPath = path.join(__dirname, 'routes');
-fs.readdirSync(routesPath).forEach(function (file) {
-    require(routesPath + '/' + file)(app);
+fs.readdirSync(routesPath).forEach(function(file) {
+  require(routesPath + '/' + file)(app);
 });
 
 // Start server
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
-    console.log('Express server listening on port %d in %s mode', port, app.get('env'));
+  console.log('Express server listening on port %d in %s mode', port, app.get('env'));
 });
