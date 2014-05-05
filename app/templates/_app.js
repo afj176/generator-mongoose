@@ -15,6 +15,8 @@ app.locals.siteName = "<%= _.capitalize(appname) %>";
 
 // Connect to database
 var db = require('./config/db');
+app.use(express.static(__dirname + '/public'));
+
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, 'models');
@@ -40,11 +42,18 @@ if ('test' == env) {
     app.set('view options', {
         pretty: true
     });
+    app.use(errorhandler({
+        dumpExceptions: true,
+        showStack: true
+    }));
 }
 
 if ('production' == env) {
     app.use(morgan());
-    app.use(express.errorHandler());
+     app.use(errorhandler({
+        dumpExceptions: false,
+        showStack: false
+    }));
 }
 
 app.engine('html', require('ejs').renderFile);
