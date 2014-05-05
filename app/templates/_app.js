@@ -3,7 +3,11 @@
 // Module dependencies.
 var express = require('express'),
     path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+    methodOverride = require('method-override'),
+    morgan = require('morgan'),
+    bodyParser = require('body-parser'),
+    errorhandler = require('errorhandler');
 
 var app = module.exports = exports.app = express();
 
@@ -11,6 +15,8 @@ app.locals.siteName = "<%= _.capitalize(appname) %>";
 
 // Connect to database
 var db = require('./config/db');
+app.use(express.static(__dirname + '/public'));
+
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, 'models');
@@ -18,33 +24,42 @@ fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
 });
 
-app.configure('development', function() {
-  app.use(express.logger('dev'));
-  app.use(express.errorHandler({ 
-    dumpExceptions: true , showStack: true
-  }));
-  app.set('view options', { pretty: true });
-});
+var env = process.env.NODE_ENV || 'development';
 
-app.configure('test', function() {
-  app.use(express.logger('test'));
-  app.set('view options', { pretty: true });
-});
+if ('development' == env) {
+    app.use(morgan('dev'));
+    app.use(errorhandler({
+        dumpExceptions: true,
+        showStack: true
+    }));
+    app.set('view options', {
+        pretty: true
+    });
+}
 
-app.configure('production', function() {
-  app.use(express.logger());
-  app.use(express.errorHandler());
-});
+if ('test' == env) {
+    app.use(morgan('test'));
+    app.set('view options', {
+        pretty: true
+    });
+    app.use(errorhandler({
+        dumpExceptions: true,
+        showStack: true
+    }));
+}
 
-app.configure(function(){
-  app.engine('html', require('ejs').renderFile);
-  app.set('view engine', 'html');
-	app.use(express.methodOverride());
-  app.use(express.urlencoded());
-  app.use(express.json());
-  // Router needs to be last
-	app.use(app.router);
-});
+if ('production' == env) {
+    app.use(morgan());
+     app.use(errorhandler({
+        dumpExceptions: false,
+        showStack: false
+    }));
+}
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.use(methodOverride());
+app.use(bodyParser());
 
 // Bootstrap routes/api
 var routesPath = path.join(__dirname, 'routes');

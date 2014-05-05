@@ -5,21 +5,41 @@
 	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-	<h1><%= siteName %></h1>
-
-  <% if(typeof routes != 'undefined'){ %>
-  <div class="routes">
-    <% Object.keys(routes).forEach(function(appRoute){ %>
-    	<h3><%= appRoute %></h3>
-    	<% routes[appRoute].forEach(function(route){ %>
-		    <div class="route">
-		    	<a href="<%= route.path %>" title="<%= route.path %>"><%= route.path %></a>
-		    </div>
-			<% }) %>    
-    <% }) %>
-  <% } %>
-  </div>
-	
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="javascript:"><%= siteName %></a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <h1>Routes</h1>
+        <%if (typeof routes != 'undefined') { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% i = 1%>
+                <% (routes).forEach(function(appRoute){ %>
+                    <%if (typeof appRoute.route != 'undefined') { %>
+                        <tr>
+                            <td><%= i++ %></td>
+                            <td><%= appRoute.route.path %></td>
+                            <td><%= appRoute.route.stack[0].method %></td>
+                            <td><a href="<%= appRoute.route.path %>" title="<%= appRoute.route.path %>"><%= appRoute.route.path %></a></td>
+                        </tr>
+                     <% } %>
+                <% });%>   
+                </tbody>
+            </table>
+        <% } %>
+        </div>
 	<script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>
