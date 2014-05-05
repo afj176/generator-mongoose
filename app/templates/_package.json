@@ -6,7 +6,11 @@
 	"dependencies": {
 		"ejs": "latest",
 		"express": "latest",
-		"mongoose": "latest"
+		"mongoose": "latest",
+    "morgan": "latest",
+    "method-override": "latest",
+    "body-parser": "latest",
+    "errorhandler": "latest"
 	},
 	"devDependencies": {
     "grunt": "latest",
