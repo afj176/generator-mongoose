@@ -44,10 +44,10 @@ It should output a file structure similiar to:
     config/
       - db.js
     public/
-  	  css/  
-  	     - style.css
-  	  js/  
-  	     - script.css
+      css/  
+         - style.css
+      js/  
+         - script.css
     models/
         - post.js
     routes/
@@ -57,10 +57,28 @@ It should output a file structure similiar to:
       - test-post.js
     views/
       - index.html
-	  bower.json
+    bower.json
     Gruntfile.js
     package.json
     Readme.md
+
+### Run the app 
+
+Development mode
+```bash
+$ grunt 
+```
+or
+
+```bash
+$ grunt server 
+```
+
+Production mode
+```bash
+$ grunt prod 
+```
+
 
 
 ### Sub Generator Schema
