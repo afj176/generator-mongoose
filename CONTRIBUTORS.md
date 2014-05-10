@@ -1,5 +1,7 @@
-generator-mongoose contributors (sorted alphabeticaly)
-======================================================
+generator-mongoose contributors
+===============================
+(sorted alphabeticaly)
+
 
 * **[Antonio Fernandes](https://github.com/afj176)**
 * **[Arvind Ravulavaru](http://thejackalofjavascript.com/)**
