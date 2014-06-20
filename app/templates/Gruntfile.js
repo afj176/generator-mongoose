@@ -68,6 +68,6 @@ module.exports = function(grunt) {
     }
   });
   grunt.registerTask('default', [ 'server' ]);
-  grunt.registerTask('prod', [ 'server:prod' ]);
+  grunt.registerTask('dist', [ 'server:prod' ]);
 
 };

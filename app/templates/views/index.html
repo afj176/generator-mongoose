@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%= siteName %></title>
-	<link rel="stylesheet" href="/css/style.css">
+  <title><%= siteName %></title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -27,12 +27,12 @@
                 <tbody>
                 <% i = 1%>
                 <% (routes).forEach(function(appRoute){ %>
-                    <%if (typeof appRoute.route != 'undefined') { %>
+                    <%if (typeof appRoute != 'undefined') { %>
                         <tr>
                             <td><%= i++ %></td>
-                            <td><%= appRoute.route.path %></td>
-                            <td><%= appRoute.route.stack[0].method %></td>
-                            <td><a href="<%= appRoute.route.path %>" title="<%= appRoute.route.path %>"><%= appRoute.route.path %></a></td>
+                            <td><%= appRoute.path %></td>
+                            <td><%= appRoute.method %></td>
+                            <td><a href="<%= appRoute.path %>" title="<%= appRoute.path %>"><%= appRoute.path %></a></td>
                         </tr>
                      <% } %>
                 <% });%>   
@@ -40,6 +40,6 @@
             </table>
         <% } %>
         </div>
-	<script type="text/javascript" src="/js/script.js"></script>
+  <script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>
