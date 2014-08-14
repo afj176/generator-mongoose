@@ -1,42 +1,22 @@
 module.exports = function(app) {
-	var route = {};
+    var route = {};
+    // index.html
+    route.index = function (req, res) {
+        /** Code to get the list of routes**/
+        var app_routes = app._router.stack;
+        var routes = [];
+        for (var i = 0; i < app_routes.length; i++) {
+            var appRoute = app_routes[i].route;
+            if((typeof appRoute != 'undefined')){
+                routes.push({
+                    path : appRoute.path,
+                    method : appRoute.stack[0].method.toUpperCase()
+                });
+            }
+        }
 
-	// index.html
-	route.index = function (req, res) {
-		/** Code to get the list of routes**/
-		var app_routes = app._router.map;
-		var routes = [];
-		for (var i = 0; i < app_routes.get.length; i++) {
-			routes.push({
-				path : app_routes.get[i].path,
-				method : 'GET'
-			});
-		};
+        res.render('index', {locals: { routes: routes }});
+    };
 
-		for (var i = 0; i < app_routes.post.length; i++) {
-			routes.push({
-				path : app_routes.post[i].path,
-				method : 'POST'
-			});
-		};
-
-		for (var i = 0; i < app_routes.put.length; i++) {
-			routes.push({
-				path : app_routes.put[i].path,
-				method : 'PUT'
-			});
-		};
-
-		for (var i = 0; i < app_routes.delete.length; i++) {
-			routes.push({
-				path : app_routes.delete[i].path,
-				method : 'DELETE'
-			});
-		};
-
-		/** Code to get the list of routes**/
-		res.render('index', {locals: { routes: routes }});
-	};
-
-	app.get('/', route.index);
+    app.get('/', route.index);
 };
