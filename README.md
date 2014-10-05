@@ -1,4 +1,5 @@
 # generator-mongoose [![Build Status](https://secure.travis-ci.org/afj176/generator-mongoose.png?branch=master)](https://travis-ci.org/afj176/generator-mongoose)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/afj176/generator-mongoose?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM](https://nodei.co/npm/generator-mongoose.png?downloads=true&stars=true)](https://nodei.co/npm/generator-mongoose/)
 
