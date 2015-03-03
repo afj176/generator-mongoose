@@ -48,7 +48,7 @@ It should output a file structure similiar to:
       css/  
          - style.css
       js/  
-         - script.css
+         - script.js
     models/
         - post.js
     routes/
