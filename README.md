@@ -92,7 +92,7 @@ $ yo mongoose:schema "article|title:String,excerpt:String,content:String,publish
 
 output:
 
-    Your creating a schema for article
+    You're creating a schema for article
     With the fields: title,excerpt,content,published,created
        create routes/article.js
        create models/article.js
