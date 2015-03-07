@@ -13,7 +13,7 @@ var SchemaGenerator = module.exports = function SchemaGenerator(args, options, c
 	fieldsArgs.forEach(function(field) {
 		fields.push(field.split(":")[0]);
 	});
-	console.log("Your creating a schema for " + schemaName );
+	console.log("You're creating a schema for " + schemaName );
 	console.log("With the fields: " + fields.join(','));
 };
 
