@@ -1,7 +1,9 @@
 'use strict';
-var util = require('util');
-var request = require('request');
-var yeoman = require('yeoman-generator');
+var util = require('util'),
+		request = require('request'),
+		yeoman = require('yeoman-generator'),
+		chalk = require('chalk'),
+		monty = require('./yo-ascii');
 
 var SchemaGenerator = module.exports = function SchemaGenerator(args, options, config) {
 	// By calling `NamedBase` here, we get the argument to the subgenerator call
@@ -13,8 +15,11 @@ var SchemaGenerator = module.exports = function SchemaGenerator(args, options, c
 	fieldsArgs.forEach(function(field) {
 		fields.push(field.split(":")[0]);
 	});
-	console.log("You're creating a schema for " + schemaName );
-	console.log("With the fields: " + fields.join(','));
+	// have Monty greet the user.
+  console.log(monty);
+	console.log(chalk.green("You're creating a schema for: ") + chalk.blue.bold(schemaName) );
+	console.log(chalk.green("With the fields: ") + chalk.yellow.bold(fields.join(',')));
+	console.log("\n");
 };
 
 util.inherits(SchemaGenerator, yeoman.generators.NamedBase);
@@ -46,7 +51,7 @@ SchemaGenerator.prototype.schematic = function schematic() {
 			case 'ObjectId':
 				props[fld].type = type.toLowerCase();
 				props[fld].ipsum = 'id';
-			break;			
+			break;
 			case 'Date':
 				props[fld].type = 'string';
 				props[fld].format = 'date-time';
@@ -54,7 +59,7 @@ SchemaGenerator.prototype.schematic = function schematic() {
 			case 'Array':
 				props[fld].type = type.toLowerCase();
 				props[fld].items = { "type": "string" };
-			break;			
+			break;
 			case 'Number':
 				props[fld].type = type.toLowerCase();
 			break;
@@ -67,9 +72,9 @@ SchemaGenerator.prototype.schematic = function schematic() {
 			break;
 			case 'Buffer':
 			case 'Mixed':
-			break;			
+			break;
 		}
-	});	
+	});
 
 	var options = {
 		uri: 'http://schematic-ipsum.herokuapp.com',
@@ -83,12 +88,14 @@ SchemaGenerator.prototype.schematic = function schematic() {
 	var cb = this.async();
 
 	request(options, function(error, response, body) {
-		console.log("starting request to schematic for test mock data...");
+		console.log(chalk.grey("starting request to schematic for test mock data..."));
+		console.log("\n");
 		if (!error && response.statusCode == 200) {
 			this.mockData = JSON.stringify(body);
 		}else{
-			console.log("There was an issue reaching http://schematic-ipsum.herokuapp.com.");
-			console.log("providing mock data for tests has failed, update you test file manually.");
+			console.log(chalk.red.bold("There was an issue reaching http://schematic-ipsum.herokuapp.com."));
+			console.log(chalk.red.bold("providing mock data for tests has failed, update you test file manually."));
+			console.log("\n");
 		}
 		cb();
 	}.bind(this));
@@ -96,6 +103,6 @@ SchemaGenerator.prototype.schematic = function schematic() {
 
 SchemaGenerator.prototype.loadTest = function loadTest() {
 	var arg = this.name.split("|");
-	var name = arg[0];	
+	var name = arg[0];
 	this.template('_test-schema.js', 'test/test-' + name + '.js');
-};	
+};
