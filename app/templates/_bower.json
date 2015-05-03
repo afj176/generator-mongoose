@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= slugName %>",
   "version": "0.0.1",
   "description": "Sample Description",
   "private": true,

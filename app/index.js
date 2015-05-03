@@ -1,8 +1,9 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
-var monty = require('./yo-ascii');
+var util = require('util'),
+    path = require('path'),
+    yeoman = require('yeoman-generator'),
+    monty = require('./yo-ascii'),
+    _s = require('underscore.string');
 
 
 var MongooseGenerator = module.exports = function MongooseGenerator(args, options, config) {
@@ -61,6 +62,8 @@ MongooseGenerator.prototype.askFor = function askFor() {
 
   this.prompt(prompts, function (props) {
     this.dbName = props.dbName;
+    this.slugName = _s.slugify(this.appname);
+    this.capName = _s.capitalize(this.appname);
     this.dbHost = props.dbHost;
     this.dbUser = props.dbUser;
     this.dbPassword = props.dbPassword;

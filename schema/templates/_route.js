@@ -1,92 +1,91 @@
 module.exports = function(app) {
   // Module dependencies.
   var mongoose = require('mongoose'),
-      <%= _.capitalize(schemaName) %> = mongoose.models.<%= _.capitalize(schemaName) %>,
+      <%= capSchemaName %> = mongoose.models.<%= capSchemaName %>,
       api = {};
 
   // ALL
-  api.<%= schemaName.toLowerCase() %>s = function (req, res) {
-    <%= _.capitalize(schemaName) %>.find(function(err, <%= schemaName.toLowerCase() %>s) {
+  api.<%= lowSchemaName %>s = function (req, res) {
+    <%= capSchemaName %>.find(function(err, <%= lowSchemaName %>s) {
       if (err) {
-        res.json(500, err);
-      } else {    
-        res.json({<%= schemaName.toLowerCase() %>s: <%= schemaName.toLowerCase() %>s});
+        res.status(500).json(err);
+      } else {
+        res.status(200).json({<%= lowSchemaName %>s: <%= lowSchemaName %>s});
       }
     });
   };
 
   // GET
-  api.<%= schemaName.toLowerCase() %> = function (req, res) {
+  api.<%= lowSchemaName %> = function (req, res) {
     var id = req.params.id;
-    <%= _.capitalize(schemaName) %>.findOne({ '_id': id }, function(err, <%= schemaName.toLowerCase() %>) {
+    <%= capSchemaName %>.findOne({ '_id': id }, function(err, <%= lowSchemaName %>) {
       if (err) {
-        res.json(404, err);
+        res.status(404).json(err);
       } else {
-        res.json({<%= schemaName.toLowerCase() %>: <%= schemaName.toLowerCase() %>});
+        res.status(200).json({<%= lowSchemaName %>: <%= lowSchemaName %>});
       }
     });
   };
 
   // POST
-  api.add<%= _.capitalize(schemaName) %> = function (req, res) {
-    
-    var <%= schemaName.toLowerCase() %>;
-      
-    if(typeof req.body.<%= schemaName.toLowerCase() %> == 'undefined'){
-         res.status(500);
-         return res.json({message: '<%= schemaName.toLowerCase() %> is undefined'});
+  api.add<%= capSchemaName %> = function (req, res) {
+
+    var <%= lowSchemaName %>;
+
+    if(typeof req.body.<%= lowSchemaName %> == 'undefined'){
+      res.status(500).json({message: '<%= lowSchemaName %> is undefined'});
     }
 
-    <%= schemaName.toLowerCase() %> = new <%= _.capitalize(schemaName) %>(req.body.<%= schemaName.toLowerCase() %>);
+    <%= lowSchemaName %> = new <%= capSchemaName %>(req.body.<%= lowSchemaName %>);
 
-    <%= schemaName.toLowerCase() %>.save(function (err) {
+    <%= lowSchemaName %>.save(function (err) {
       if (!err) {
-        console.log("created <%= schemaName.toLowerCase() %>");
-        return res.json(201, <%= schemaName.toLowerCase() %>.toObject());
+        console.log("created <%= lowSchemaName %>");
+        return res.status(201).json(<%= lowSchemaName %>.toObject());
       } else {
-        return res.json(500, err);
+        return res.status(500).json(err);
       }
     });
 
   };
 
   // PUT
-  api.edit<%= _.capitalize(schemaName) %> = function (req, res) {
+  api.edit<%= capSchemaName %> = function (req, res) {
     var id = req.params.id;
 
-    <%= _.capitalize(schemaName) %>.findById(id, function (err, <%= schemaName.toLowerCase() %>) {
+    <%= capSchemaName %>.findById(id, function (err, <%= lowSchemaName %>) {
 
 
     <% schemaFields.forEach(function(field, index) { %>
-      if(typeof req.body.<%= schemaName.toLowerCase() %>["<%= field.split(':')[0] %>"] != 'undefined'){
-        <%= schemaName.toLowerCase() %>["<%= field.split(':')[0] %>"] = req.body.<%= schemaName.toLowerCase() %>["<%= field.split(':')[0] %>"];
-      }  
+      if(typeof req.body.<%= lowSchemaName %>["<%= field.split(':')[0] %>"] != 'undefined'){
+        <%= lowSchemaName %>["<%= field.split(':')[0] %>"] = req.body.<%= lowSchemaName %>["<%= field.split(':')[0] %>"];
+      }
     <% }) %>
 
-      return <%= schemaName.toLowerCase() %>.save(function (err) {
+      return <%= lowSchemaName %>.save(function (err) {
         if (!err) {
-          console.log("updated <%= schemaName.toLowerCase() %>");
-          return res.json(200, <%= schemaName.toLowerCase() %>.toObject());        
+          console.log("updated <%= lowSchemaName %>");
+          return res.status(200).json(<%= lowSchemaName %>.toObject());
         } else {
-         return res.json(500, err);
+         return res.status(500).json(err);
         }
-        return res.json(<%= schemaName.toLowerCase() %>);
+        return res.status(200).json(<%= lowSchemaName %>);
       });
     });
 
   };
 
   // DELETE
-  api.delete<%= _.capitalize(schemaName) %> = function (req, res) {
+  api.delete<%= capSchemaName %> = function (req, res) {
     var id = req.params.id;
-    return <%= _.capitalize(schemaName) %>.findById(id, function (err, <%= schemaName.toLowerCase() %>) {
-      return <%= schemaName.toLowerCase() %>.remove(function (err) {
+    return <%= capSchemaName %>.findById(id, function (err, <%= lowSchemaName %>) {
+      return <%= lowSchemaName %>.remove(function (err) {
         if (!err) {
-          console.log("removed <%= schemaName.toLowerCase() %>");
-          return res.send(204);
+          console.log("removed <%= lowSchemaName %>");
+          return res.status(204).send();
         } else {
           console.log(err);
-          return res.json(500, err);
+          return res.status(500).json(err);
         }
       });
     });
@@ -94,9 +93,9 @@ module.exports = function(app) {
   };
 
 
-  app.get('/api/<%= schemaName.toLowerCase() %>s', api.<%= schemaName.toLowerCase() %>s);
-  app.get('/api/<%= schemaName.toLowerCase() %>/:id', api.<%= schemaName.toLowerCase() %>);
-  app.post('/api/<%= schemaName.toLowerCase() %>', api.add<%= _.capitalize(schemaName) %>);
-  app.put('/api/<%= schemaName.toLowerCase() %>/:id', api.edit<%= _.capitalize(schemaName) %>);
-  app.delete('/api/<%= schemaName.toLowerCase() %>/:id', api.delete<%= _.capitalize(schemaName) %>);
+  app.get('/api/<%= lowSchemaName %>s', api.<%= lowSchemaName %>s);
+  app.get('/api/<%= lowSchemaName %>/:id', api.<%= lowSchemaName %>);
+  app.post('/api/<%= lowSchemaName %>', api.add<%= capSchemaName %>);
+  app.put('/api/<%= lowSchemaName %>/:id', api.edit<%= capSchemaName %>);
+  app.delete('/api/<%= lowSchemaName %>/:id', api.delete<%= capSchemaName %>);
 };

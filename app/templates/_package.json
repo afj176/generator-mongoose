@@ -1,6 +1,6 @@
 {
-  "name": "<%= _.slugify(appname) %>",
-  "description": "<%= _.slugify(appname) %> app description here",
+  "name": "<%= slugName %>",
+  "description": "<%= slugName %> app description here",
   "version": "0.0.1",
   "private": true,
 	"dependencies": {
@@ -15,7 +15,7 @@
 	"devDependencies": {
     "grunt": "latest",
     "grunt-mocha-test": "latest",
-    "bower": "latest",    
+    "bower": "latest",
     "supertest": "latest",
     "mocha": "latest",
     "grunt-open": "^0.2.3",
@@ -27,5 +27,5 @@
     "postinstall": "grunt test",
     "test" : "grunt test",
     "start": "app.js"
-  }	
+  }
 }

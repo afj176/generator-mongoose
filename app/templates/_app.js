@@ -11,7 +11,7 @@ var express = require('express'),
 
 var app = module.exports = exports.app = express();
 
-app.locals.siteName = "<%= _.capitalize(appname) %>";
+app.locals.siteName = "<%= capName %>";
 
 // Connect to database
 var db = require('./config/db');
@@ -59,7 +59,8 @@ if ('production' == env) {
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(methodOverride());
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Bootstrap routes/api
 var routesPath = path.join(__dirname, 'routes');

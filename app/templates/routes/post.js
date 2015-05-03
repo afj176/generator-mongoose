@@ -8,9 +8,9 @@ module.exports = function(app) {
   api.posts = function (req, res) {
     Post.find(function(err, posts) {
       if (err) {
-        res.json(500, err);
-      } else {    
-        res.json({posts: posts});
+        res.status(500).json(err);
+      } else {
+        res.status(200).json({posts: posts});
       }
     });
   };
@@ -20,20 +20,20 @@ module.exports = function(app) {
     var id = req.params.id;
     Post.findOne({ '_id': id }, function(err, post) {
       if (err) {
-        res.json(404, err);
+        res.status(404).json(err);
       } else {
-        res.json(200, {post: post});
+        res.status(200).json({post: post});
       }
     });
   };
 
   // POST
   api.addPost = function (req, res) {
-    
+
     var post;
-      
+
     if(typeof req.body.post == 'undefined'){
-      return res.json(500, {message: 'post is undefined'});
+      return res.status(500).json({message: 'post is undefined'});
     }
 
     post = new Post(req.body.post);
@@ -41,9 +41,9 @@ module.exports = function(app) {
     post.save(function (err) {
       if (!err) {
         console.log("created post");
-        return res.json(201, post.toObject());
+        return res.status(201).json(post.toObject());
       } else {
-         return res.json(500, err);
+         return res.status(500).json(err);
       }
     });
 
@@ -56,36 +56,36 @@ module.exports = function(app) {
     Post.findById(id, function (err, post) {
 
 
-    
+
       if(typeof req.body.post["title"] != 'undefined'){
         post["title"] = req.body.post["title"];
-      }  
-    
+      }
+
       if(typeof req.body.post["excerpt"] != 'undefined'){
         post["excerpt"] = req.body.post["excerpt"];
-      }  
-    
+      }
+
       if(typeof req.body.post["content"] != 'undefined'){
         post["content"] = req.body.post["content"];
-      }  
-    
+      }
+
       if(typeof req.body.post["active"] != 'undefined'){
         post["active"] = req.body.post["active"];
-      }  
-    
+      }
+
       if(typeof req.body.post["created"] != 'undefined'){
         post["created"] = req.body.post["created"];
-      }  
-    
+      }
+
 
       return post.save(function (err) {
         if (!err) {
           console.log("updated post");
-          return res.json(200, post.toObject());        
+          return res.status(200).json(post.toObject());
         } else {
-         return res.json(500, err);
+         return res.status(500).json(err);
         }
-        return res.json(post);
+        return res.status(200).json(post);
       });
     });
 
@@ -98,10 +98,10 @@ module.exports = function(app) {
       return post.remove(function (err) {
         if (!err) {
           console.log("removed post");
-          return res.send(204);
+          return res.status(204).send();
         } else {
           console.log(err);
-          return res.json(500, err);
+          return res.status(500).json(err);
         }
       });
     });

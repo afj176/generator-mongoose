@@ -3,7 +3,8 @@ var util = require('util'),
 		request = require('request'),
 		yeoman = require('yeoman-generator'),
 		chalk = require('chalk'),
-		monty = require('./yo-ascii');
+		monty = require('./yo-ascii'),
+		_s = require('underscore.string');
 
 var SchemaGenerator = module.exports = function SchemaGenerator(args, options, config) {
 	// By calling `NamedBase` here, we get the argument to the subgenerator call
@@ -29,6 +30,8 @@ SchemaGenerator.prototype.files = function files() {
 	var name = arg[0];
 	var fields = arg[1].split(',');
 	this.schemaName = name;
+	this.capSchemaName = _s.capitalize(this.schemaName);
+	this.lowSchemaName = schemaName.toLowerCase();
 	this.schemaFields = (typeof fields != 'undefined') ? fields : ['title:String', 'content:String', 'created:Date'];
 	this.mockData = "{}";
 	this.mkdir('models');
@@ -46,10 +49,11 @@ SchemaGenerator.prototype.schematic = function schematic() {
 	this.schemaFields.forEach(function(field, index) {
 		var fld = field.split(":")[0];
 		var type = field.split(":")[1];
+		var lowerType = type.toLowerCase();
 		props[fld] = {};
 		switch(type){
 			case 'ObjectId':
-				props[fld].type = type.toLowerCase();
+				props[fld].type = lowerType;
 				props[fld].ipsum = 'id';
 			break;
 			case 'Date':
@@ -57,17 +61,17 @@ SchemaGenerator.prototype.schematic = function schematic() {
 				props[fld].format = 'date-time';
 			break;
 			case 'Array':
-				props[fld].type = type.toLowerCase();
+				props[fld].type = lowerType;
 				props[fld].items = { "type": "string" };
 			break;
 			case 'Number':
-				props[fld].type = type.toLowerCase();
+				props[fld].type = lowerType;
 			break;
 			case 'Boolean':
-				props[fld].type = type.toLowerCase();
+				props[fld].type = lowerType;
 			break;
 			case 'String':
-				props[fld].type = type.toLowerCase();
+				props[fld].type = lowerType;
 				props[fld].ipsum = "sentence"
 			break;
 			case 'Buffer':
