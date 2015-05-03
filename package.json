@@ -27,10 +27,11 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yo": ">=1.4.x",
-    "yeoman-generator": ">=0.18.0",
+    "chalk": ">=1.x",
     "request": ">=2.5.x",
-    "chalk": ">=1.x"
+    "underscore.string": "^3.0.3",
+    "yeoman-generator": ">=0.18.0",
+    "yo": ">=1.4.x"
   },
   "devDependencies": {
     "mocha": ">=2.x"
