@@ -14,7 +14,7 @@ describe('🏃  running `yo mongoose`', function () {
         helpers.run(path.join( __dirname, '../app'))
           .inDir(path.join( __dirname, './temp'))  // Clear the directory and set it as the CWD
           .withOptions({ mongoose: 'app' })            // Mock options passed in
-          .withPrompt({
+          .withPrompts({
               'dbName'    : 'test-yo-mongoose',
               'dbHost'    : 'localhost',
               'dbUser'    : '',

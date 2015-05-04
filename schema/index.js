@@ -31,7 +31,7 @@ SchemaGenerator.prototype.files = function files() {
 	var fields = arg[1].split(',');
 	this.schemaName = name;
 	this.capSchemaName = _s.capitalize(this.schemaName);
-	this.lowSchemaName = schemaName.toLowerCase();
+	this.lowSchemaName = this.schemaName.toLowerCase();
 	this.schemaFields = (typeof fields != 'undefined') ? fields : ['title:String', 'content:String', 'created:Date'];
 	this.mockData = "{}";
 	this.mkdir('models');
