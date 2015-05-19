@@ -3,7 +3,8 @@ var util = require('util'),
     path = require('path'),
     yeoman = require('yeoman-generator'),
     monty = require('./yo-ascii'),
-    _s = require('underscore.string');
+    _s = require('underscore.string'),
+    mkdirp = require('mkdirp');
 
 
 var MongooseGenerator = module.exports = function MongooseGenerator(args, options, config) {
@@ -74,44 +75,45 @@ MongooseGenerator.prototype.askFor = function askFor() {
 };
 
 MongooseGenerator.prototype.app = function app() {
-  this.mkdir('test');
-  this.mkdir('config');
+  mkdirp('test');
+  mkdirp('config');
   this.template('_package.json', 'package.json');
   this.template('_app.js', 'app.js');
-  this.copy('Gruntfile.js', 'Gruntfile.js');
-  this.copy('bowerrc', '.bowerrc');
+  this.fs.copy(this.templatePath('Gruntfile.js'), this.destinationPath('Gruntfile.js'));
+  this.fs.copy(this.templatePath('bowerrc'), this.destinationPath('.bowerrc'));
   this.template('_bower.json', 'bower.json');
 };
 
 MongooseGenerator.prototype.routes = function routes() {
-  this.mkdir('routes');
-  this.copy('routes/index.js', 'routes/index.js');
+  mkdirp('routes');
+  this.fs.copy(this.templatePath('routes/index.js'), this.destinationPath('routes/index.js'));
 };
 
 MongooseGenerator.prototype.publicFiles = function publicFiles() {
-  this.mkdir('public');
-  this.mkdir('public/css');
-  this.copy('public/css/style.css', 'public/css/style.css');
-  this.mkdir('public/js');
-  this.copy('public/js/script.js', 'public/js/script.js');
+  mkdirp('public');
+  mkdirp('public/css');
+  this.fs.copy(this.templatePath('public/css/style.css'), this.destinationPath('public/css/style.css'));
+  mkdirp('public/js');
+  this.fs.copy(this.templatePath('public/js/script.js'), this.destinationPath('public/js/script.js'));
 };
 
 MongooseGenerator.prototype.views = function views() {
-  this.mkdir('views');
-  this.copy('views/index.html', 'views/index.html');
+  mkdirp('views');
+  this.fs.copy(this.templatePath('views/index.html'), this.destinationPath('views/index.html'));
 };
 
 MongooseGenerator.prototype.projectfiles = function projectfiles() {
   this.template('_README.md', 'README.md');
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
+  this.fs.copy(this.templatePath('editorconfig'), this.destinationPath('.editorconfig'));
+  this.fs.copy(this.templatePath('jshintrc'), this.destinationPath('.jshintrc'));
 };
 
 MongooseGenerator.prototype.db = function db() {
-  this.mkdir('models');
+  mkdirp('models');
+  mkdirp('api');
   this.template('config/_db.js', 'config/db.js');
-  this.copy('models/post.js', 'models/post.js');
-  this.copy('routes/post.js', 'routes/post.js');
+  this.fs.copy(this.templatePath('models/post.js'), this.destinationPath('models/post.js'));
+  this.fs.copy(this.templatePath('api/post.js'), this.destinationPath('api/post.js'));
 };
 
 MongooseGenerator.prototype.test = function test() {

@@ -1,22 +1,20 @@
-module.exports = function(app) {
-    var route = {};
-    // index.html
-    route.index = function (req, res) {
-        /** Code to get the list of routes**/
-        var app_routes = app._router.stack;
-        var routes = [];
-        for (var i = 0; i < app_routes.length; i++) {
-            var appRoute = app_routes[i].route;
-            if((typeof appRoute != 'undefined')){
-                routes.push({
-                    path : appRoute.path,
-                    method : appRoute.stack[0].method.toUpperCase()
-                });
-            }
-        }
+var express = require('express');
+var app = express();
+var router = express.Router();
 
-        res.render('index', {locals: { routes: routes }});
-    };
+/* GET home page. */
+router.get('/', function (req, res) {
 
-    app.get('/', route.index);
-};
+  var routes = [
+    { path: "/posts", method: "GET" },
+    { path: "/post", method: "POST" },
+    { path: "/post/:id", method: "GET" },
+    { path: "/post/:id", method: "PUT" },
+    { path: "/post/:id", method: "DELETE" }
+  ];
+
+  res.render('index', {routes: routes });
+
+});
+
+module.exports = router;

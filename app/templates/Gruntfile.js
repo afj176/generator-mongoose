@@ -42,9 +42,9 @@ module.exports = function(grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= express.options.port %>'
+        url: 'http://localhost:' + grunt.config.get('express.options.port')
       }
-    }    
+    }
   });
 
   grunt.registerTask('test', 'mochaTest');

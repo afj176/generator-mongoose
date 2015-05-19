@@ -62,10 +62,16 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Bootstrap routes/api
+// Bootstrap routes
 var routesPath = path.join(__dirname, 'routes');
 fs.readdirSync(routesPath).forEach(function(file) {
-  require(routesPath + '/' + file)(app);
+  app.use('/', require(routesPath + '/' + file));
+});
+
+// Bootstrap api
+var apiPath = path.join(__dirname, 'api');
+fs.readdirSync(apiPath).forEach(function(file) {
+  app.use('/api', require(apiPath + '/' + file));
 });
 
 // Start server

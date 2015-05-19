@@ -21,25 +21,27 @@
                       <th>#</th>
                       <th>Path</th>
                       <th>Method</th>
-                      <th>Link</th>
                     </tr>
                 </thead>
                 <tbody>
-                <% i = 1%>
-                <% (routes).forEach(function(appRoute){ %>
-                    <%if (typeof appRoute != 'undefined') { %>
+                <% i = 1 %>
+                <% (routes).forEach(function(rt){ %>
+                    <%if (typeof rt != 'undefined') { %>
                         <tr>
                             <td><%= i++ %></td>
-                            <td><%= appRoute.path %></td>
-                            <td><%= appRoute.method %></td>
-                            <td><a href="<%= appRoute.path %>" title="<%= appRoute.path %>"><%= appRoute.path %></a></td>
+                            <td><%= rt.path %></td>
+                            <td><%= rt.method %></td>
                         </tr>
                      <% } %>
-                <% });%>   
+                <% });%>
                 </tbody>
             </table>
         <% } %>
-        </div>
+        <p>Add a post:</p>
+<pre class="snippet">curl -i -X POST -H "Content-Type: application/json" -d "{\"post\": {\"title\": \"Hell Is Other Robots\", \"excerpt\": \"Alice may have called in on the meeting at Malkin Tower...\", \"content\": \"Alice may have called in on the meeting at Malkin Tower on her way to a secret (and illegal) Good Friday Catholic service, and refused to speak for fear of incriminating her fellow Catholics.\",\"active\": true}}" http://localhost:3000/api/post</pre>
+        <p>See all posts:</p>
+<pre class="snippet">curl http://localhost:3000/api/posts</pre>
+    </div>
   <script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>

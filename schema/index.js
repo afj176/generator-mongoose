@@ -4,7 +4,8 @@ var util = require('util'),
 		yeoman = require('yeoman-generator'),
 		chalk = require('chalk'),
 		monty = require('./yo-ascii'),
-		_s = require('underscore.string');
+		_s = require('underscore.string'),
+		mkdirp = require('mkdirp');
 
 var SchemaGenerator = module.exports = function SchemaGenerator(args, options, config) {
 	// By calling `NamedBase` here, we get the argument to the subgenerator call
@@ -34,10 +35,10 @@ SchemaGenerator.prototype.files = function files() {
 	this.lowSchemaName = this.schemaName.toLowerCase();
 	this.schemaFields = (typeof fields != 'undefined') ? fields : ['title:String', 'content:String', 'created:Date'];
 	this.mockData = "{}";
-	this.mkdir('models');
-	this.mkdir('test');
-	this.mkdir('routes');
-	this.template('_route.js', 'routes/' + name + '.js');
+	mkdirp('models');
+	mkdirp('test');
+	mkdirp('api');
+	this.template('_api.js', 'api/' + name + '.js');
 	this.template('_schema.js', 'models/' + name + '.js');
 
 };

@@ -221,6 +221,15 @@ th {
   color: #999;
 }
 
+pre.snippet{
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+  word-wrap: break-word;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(../fonts/glyphicons-halflings-regular.eot);
@@ -349,4 +358,3 @@ th {
 @-ms-viewport {
   width: device-width;
 }
-
